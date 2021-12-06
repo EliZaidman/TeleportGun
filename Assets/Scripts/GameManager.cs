@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject gun;
     public GameObject bullet;
+    public Animator ani;
    [SerializeField] private GunManager gunManager;
 
     private void Start()
@@ -15,7 +16,10 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ani.Play("Reload");
+        }
 
     }
 }

@@ -71,6 +71,25 @@ public class MovementScript : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            if (gravity > 1)
+            {
+                moveDirection.y = jumpSpeed / 100;
+                gravity = 1;
+            }
+            
+            if (gravity == 1)
+            {
+                gravity = 1;
+            }
+            
+        }
+        else
+        {
+            gravity = 20f;
+        }
     }
     private void FixedUpdate()
     {
@@ -78,4 +97,7 @@ public class MovementScript : MonoBehaviour
         //Physics.SyncTransforms();
         characterController.Move(moveDirection * Time.fixedDeltaTime);
     }
+
+
+
 }
