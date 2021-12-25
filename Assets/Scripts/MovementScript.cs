@@ -18,6 +18,13 @@ public class MovementScript : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
+
+    public AudioClip footStepSound;
+    public float footStepDelay;
+
+    private float nextFootstep = 0;
+
+
     [HideInInspector]
     public bool canMove = true;
 
@@ -90,7 +97,37 @@ public class MovementScript : MonoBehaviour
         {
             gravity = 20f;
         }
-    }
+
+
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) && characterController.isGrounded)
+        {
+            nextFootstep -= Time.deltaTime;
+            if (isRunning)
+            {
+                footStepDelay = 0.3f;
+                if (nextFootstep <= 0)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+                    nextFootstep += footStepDelay;
+                }
+            }
+            else
+            {
+                footStepDelay = 0.5f;
+                if (nextFootstep <= 0)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+                    nextFootstep += footStepDelay;
+                }
+            }
+
+        }
+    
+
+
+
+}
     private void FixedUpdate()
     {
         // Move the controller

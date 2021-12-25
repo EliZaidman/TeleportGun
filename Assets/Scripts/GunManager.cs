@@ -20,13 +20,14 @@ public class GunManager : MonoBehaviour
     }
     void Start()
     {
-
+        
     }
     
 
 
     void Update()
     {
+
         cc = player.GetComponentInChildren<CharacterController>();
         if (currnetBall != null)
         {
@@ -34,7 +35,7 @@ public class GunManager : MonoBehaviour
 
         }
         launchVelocity = Mathf.Clamp(launchVelocity, 1, 25);
-
+        
         if (Input.GetButtonDown("Fire1"))
         {
             if (currnetBall == null)
