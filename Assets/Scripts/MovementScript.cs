@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -13,7 +14,7 @@ public class MovementScript : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
-
+    public Slider glideSlider;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
@@ -27,9 +28,11 @@ public class MovementScript : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
-
+    public float speed = 3.0F;
+    public float rotateSpeed = 100.0F;
     void Start()
     {
+        glideSlider.value = 1;
         characterController = GetComponent<CharacterController>();
 
         // Lock cursor
@@ -67,6 +70,25 @@ public class MovementScript : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
+        if (Input.GetKey(KeyCode.F)&& glideSlider)
+        {
+            glideSlider.gameObject.SetActive(true);
+            glideSlider.value -= 0.4F * Time.deltaTime;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                glideSlider.value -= 0.5F * Time.deltaTime;
+            }
+            if (glideSlider.value == 0)
+            {
+                glideSlider.gameObject.SetActive(false);
+            }
+
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            glideSlider.value = 1;
+            glideSlider.gameObject.SetActive(false);
+        }
 
 
 
@@ -79,7 +101,7 @@ public class MovementScript : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
 
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F) && glideSlider.value > 0)
         {
             if (gravity > 1)
             {
@@ -100,10 +122,10 @@ public class MovementScript : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) && characterController.isGrounded)
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) && characterController.isGrounded && !Input.GetKey(KeyCode.F))
         {
             nextFootstep -= Time.deltaTime;
-            if (isRunning)
+            if (isRunning && characterController.isGrounded)
             {
                 footStepDelay = 0.3f;
                 if (nextFootstep <= 0)
@@ -123,7 +145,7 @@ public class MovementScript : MonoBehaviour
             }
 
         }
-    
+
 
 
 
@@ -133,6 +155,34 @@ public class MovementScript : MonoBehaviour
         // Move the controller
         //Physics.SyncTransforms();
         characterController.Move(moveDirection * Time.fixedDeltaTime);
+    }
+    public void Push(float jumpForce)
+    {
+
+        // Rotate around y - axis
+        transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
+        Debug.Log("allah");
+        moveDirection.y = jumpSpeed * jumpForce;
+        
+        if (!characterController.isGrounded)
+        {
+            moveDirection.y -= gravity * Time.deltaTime;
+        }
+       
+    }
+    
+    public void Throw()
+    {
+
+
+            // Rotate around y - axis
+            transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
+
+            // Move forward / backward
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            float curSpeed = speed * Input.GetAxis("Vertical");
+            gameObject.GetComponent<CharacterController>().SimpleMove(forward * curSpeed);
+        
     }
 
 
