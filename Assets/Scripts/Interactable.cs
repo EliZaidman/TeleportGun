@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    public bool isInRange = false;
+    public bool isInRange;
     public KeyCode interactKey;
     public UnityEvent interactAction;
    
@@ -25,23 +25,7 @@ public class Interactable : MonoBehaviour
         }
         
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-   
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        isInRange = true;
-    //        Debug.Log("in range");
-    //    }
-    //}
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        isInRange = true;
-    //        Debug.Log("not in range");
-    //    }
-    //}
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

@@ -6,6 +6,7 @@ public class LoseGravity : MonoBehaviour
 {
    public Rigidbody rb;
     public float gravitForce;
+    public AudioClip flyingobject;
     private void Awake()
     {
         rb.GetComponent<Rigidbody>();
@@ -18,8 +19,8 @@ public class LoseGravity : MonoBehaviour
         }
         else
         rb.useGravity = false;
-        rb.isKinematic = false;
         rb.AddForce(0, gravitForce, 0);
+        
     }
    
 }
