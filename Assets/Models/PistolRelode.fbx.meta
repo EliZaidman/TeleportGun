@@ -1,11 +1,69 @@
 fileFormatVersion: 2
-guid: 6b94659c637720a4496e8a464bd70107
+guid: 352253cadc821d8438484d3d62fa3c41
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
-  externalObjects: {}
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel_Color
+    second: {fileID: 2100000, guid: 0db35b3d940223546b393df126efdd99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_Weapon_Color
+    second: {fileID: 2100000, guid: dcf5e5ef110febd4bb026d9250a83bd2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye_Scope_Color
+    second: {fileID: 2100000, guid: 4caa70f4235b17743bac521d76d0305e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Liquid_Color
+    second: {fileID: 2100000, guid: 8f37a17ce6cea2c4bb32e0230421dea8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plate_Color
+    second: {fileID: 2100000, guid: c23ebcf24259bb943b80a88b63db9a09, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scope_Color
+    second: {fileID: 2100000, guid: 462f32a82e886dd4aaf85c14b3a056e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tube
+    second: {fileID: 2100000, guid: 5bfe1e81e8ec85544b534970a818decd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tubes_Base__Color
+    second: {fileID: 2100000, guid: 766a899c9e1ee554fa59609bf395e758, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tubes_Color
+    second: {fileID: 2100000, guid: e3aab84548c30e743a38fad0d49c4f38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface1
+    second: {fileID: 2100000, guid: 96718f3cb78d4284c93caf36a9b3a0a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn15
+    second: {fileID: 2100000, guid: a218216ab07c58645b94e2a7b4612f0a, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

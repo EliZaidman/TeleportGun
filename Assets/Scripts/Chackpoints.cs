@@ -5,9 +5,16 @@ using UnityEngine;
 public class Chackpoints : MonoBehaviour
 {
     public GameObject chackpoint;
-    public GameObject player;
-    [SerializeField] private CharacterController cc;
+    private GameObject player;
+    private CharacterController cc;
+    
 
+    private void Start()
+    {
+        player = GameObject.Find("Character");
+        cc = player.GetComponentInChildren<CharacterController>();
+
+    }
     private void Update()
     {
 
@@ -16,7 +23,6 @@ public class Chackpoints : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        cc = player.GetComponentInChildren<CharacterController>();
         if (other.CompareTag("Player"))
         {
             Debug.Log("PLAYER! Trigger");
