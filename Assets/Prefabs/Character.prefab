@@ -141,9 +141,12 @@ MonoBehaviour:
   playerCamera: {fileID: 235844659556660580}
   lookSpeed: 2
   lookXLimit: 45
+  glideSlider: {fileID: 0}
   footStepSound: {fileID: 8300000, guid: 263f8aaa01d5d0041b082b7b69d9ca02, type: 3}
   footStepDelay: 0.35
   canMove: 1
+  speed: 3
+  rotateSpeed: 100
 --- !u!82 &235844658059472022
 AudioSource:
   m_ObjectHideFlags: 0
@@ -512,11 +515,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunHead: {fileID: 235844659191795033}
   player: {fileID: 235844658059472016}
-  textMeshPro: {fileID: 0}
   cc: {fileID: 235844658059472030}
-  projectile: {fileID: 1299226696344260430, guid: 95d61a524d853304f8b46903235151ee, type: 3}
+  projectile:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   launchVelocity: 2500
   currnetBall: {fileID: 0}
+  powerSlider: {fileID: 0}
+  redBulletActive: 1
+  greenBulletActive: 0
+  blackBulletActive: 0
+  redFIll: {fileID: 0}
+  greenFIll: {fileID: 0}
+  blackFIll: {fileID: 0}
+  i: 0
 --- !u!114 &5158332758393303032
 MonoBehaviour:
   m_ObjectHideFlags: 0

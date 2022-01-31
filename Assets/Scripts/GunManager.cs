@@ -6,7 +6,6 @@ public class GunManager : MonoBehaviour
 {
     public Transform gunHead;
     public GameObject player;
-    [SerializeField] private TextMeshProUGUI textMeshPro;
     [SerializeField] private CharacterController cc;
 
     public GameObject[] projectile;

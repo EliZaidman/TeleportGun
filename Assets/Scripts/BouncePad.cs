@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BouncePad : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public float jumpForce;
     //public MovementScript MovementScript;
 
@@ -16,7 +16,8 @@ public class BouncePad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("Character");
+
     }
 
     // Update is called once per frame
