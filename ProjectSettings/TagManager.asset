@@ -8,15 +8,16 @@ TagManager:
   - Red
   - Black
   - VelocityWall
+  - Blue
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
-  - 
+  - Gun
   - 
   - 
   - 

@@ -5,11 +5,12 @@ using UnityEngine;
 public class TestScript : MonoBehaviour
 {
     public Animation shootAnim;
-    private void Update()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (collision.gameObject.tag == "Player")
         {
-            shootAnim.Play("Reload");
+            Debug.Log("Entered PLayer");
         }
     }
 }
