@@ -8,16 +8,16 @@ TagManager:
   - Red
   - Black
   - VelocityWall
-  - ChainFloor
+  - Blue
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Ground
-  - 
+  - Gun
   - 
   - 
   - 

@@ -13,7 +13,7 @@ public class MovementScript : MonoBehaviour
     public float gravity = 20.0f;
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
-    public float lookXLimit = 45.0f;
+    public float lookXLimit;
     public Slider glideSlider;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -90,7 +90,34 @@ public class MovementScript : MonoBehaviour
             glideSlider.gameObject.SetActive(false);
         }
 
-
+        if (!GetComponentInChildren<GunManager>().currnetBall)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                lookXLimit = 0;
+                Camera.main.fieldOfView = 50;
+                GetComponentInChildren<GunMove>().lookXLimit = 60;
+                GetComponentInChildren<LineRenderer>().enabled = true;
+                Debug.Log("Zooming");
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                lookXLimit = 25;
+                Camera.main.fieldOfView = 105;
+                GetComponentInChildren<GunMove>().lookXLimit = 5;
+                GetComponentInChildren<LineRenderer>().enabled = false;
+                Debug.Log("Stopped Zooming");
+            }
+        
+        }
+        else
+        {
+            lookXLimit = 25;
+            Camera.main.fieldOfView = 105;
+            GetComponentInChildren<GunMove>().lookXLimit = 5;
+            GetComponentInChildren<LineRenderer>().enabled = false;
+            Debug.Log("Stopped Zooming");
+        }
 
         // Player and Camera rotation
         if (canMove)
