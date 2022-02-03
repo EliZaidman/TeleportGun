@@ -22,6 +22,7 @@ public class GunManager : MonoBehaviour
     public Image greenFIll;
     public Image blackFIll;
 
+    public Animation shootAnim;
     private void Awake()
     {
 
@@ -52,6 +53,7 @@ public class GunManager : MonoBehaviour
                 currnetBall.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
                                                      (0, 0, launchVelocity * 10));
                 Mathf.Clamp(0, 100, launchVelocity);
+                shootAnim.Play("Shoot");
             }
             return;
         }
@@ -97,6 +99,7 @@ public class GunManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Destroy(currnetBall);
+            shootAnim.Play("Reload");
         }
     }
 
