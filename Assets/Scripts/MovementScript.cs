@@ -18,8 +18,8 @@ public class MovementScript : MonoBehaviour
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
-
-
+    public AudioClip[] FloorNoise;
+    private FloorType currentFloor;
     public AudioClip footStepSound;
     public float footStepDelay;
 
@@ -130,7 +130,8 @@ public class MovementScript : MonoBehaviour
                 footStepDelay = 0.3f;
                 if (nextFootstep <= 0)
                 {
-                    GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+                    //GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+                    AudioManager.Instance.Play(FloorNoise[(int)currentFloor]);
                     nextFootstep += footStepDelay;
                 }
             }
@@ -139,17 +140,18 @@ public class MovementScript : MonoBehaviour
                 footStepDelay = 0.5f;
                 if (nextFootstep <= 0)
                 {
-                    GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+                    //GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+                    AudioManager.Instance.Play(FloorNoise[(int)currentFloor]);
                     nextFootstep += footStepDelay;
                 }
             }
 
         }
 
+       
 
 
-
-}
+    }
     private void FixedUpdate()
     {
         // Move the controller
@@ -184,7 +186,10 @@ public class MovementScript : MonoBehaviour
             gameObject.GetComponent<CharacterController>().SimpleMove(forward * curSpeed);
         
     }
-
-
+  public void ChanchFloor(FloorType ft)
+    {
+        currentFloor = ft;
+    }
+    
 
 }
