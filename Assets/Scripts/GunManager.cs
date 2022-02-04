@@ -8,6 +8,8 @@ public class GunManager : MonoBehaviour
     public GameObject player;
     [SerializeField] private CharacterController cc;
 
+    MovementScript playerMovment;
+
     public GameObject[] projectile;
     public float launchVelocity;
     public GameObject currnetBall;
@@ -31,11 +33,13 @@ public class GunManager : MonoBehaviour
     }
     void Start()
     {
+        playerMovment = GetComponentInParent<MovementScript>();
         powerSlider.value = 1;
         lineRenderer = GetComponent<LineRenderer>();
 
     }
 
+    
 
     public int i;
     void Update()
@@ -80,14 +84,60 @@ public class GunManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q))
         {
+            lineRenderer.enabled = true;
             launchVelocity -= 0.08f;
             powerSlider.value -= 0.0008f;
         }
-        if (Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.E))
         {
+            lineRenderer.enabled = true;
             launchVelocity += 0.08f;
             powerSlider.value += 0.0008f;
         }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
+
+
+
+
+
+
+
+
+        if (!currnetBall)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                playerMovment.lookXLimit = 0;
+                Camera.main.fieldOfView = 50;
+                //GetComponentInChildren<GunMove>().lookXLimit = lookXLimitDefult;
+                GetComponentInChildren<LineRenderer>().enabled = true;
+                Debug.Log("Zooming");
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                playerMovment.lookXLimit = playerMovment.lookXLimitDefult;
+                Camera.main.fieldOfView = 105;
+                //GetComponentInChildren<GunMove>().lookXLimit = lookXLimitDefult;
+                GetComponentInChildren<LineRenderer>().enabled = false;
+                Debug.Log("Stopped Zooming");
+            }
+
+        }
+        else
+        {
+            playerMovment.lookXLimit = playerMovment.lookXLimitDefult;
+            Camera.main.fieldOfView = 105;
+            //GetComponentInChildren<GunMove>().lookXLimit = lookXLimitDefult;
+            GetComponentInChildren<LineRenderer>().enabled = false;
+            Debug.Log("Stopped Zooming");
+        }
+
+
+
+
 
 
 
@@ -114,6 +164,7 @@ public class GunManager : MonoBehaviour
 
     }
 
+    
 
     private void BulletTypeSelector()
     {
@@ -169,6 +220,8 @@ public class GunManager : MonoBehaviour
             lineRenderer.endColor = Color.blue;
 
         }
+        
     }
 
+   
 }
