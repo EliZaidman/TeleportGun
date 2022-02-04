@@ -9628,7 +9628,11 @@ Transform:
   m_GameObject: {fileID: 2057670102744337402}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.45, y: 3.23, z: 0}
+<<<<<<< HEAD
   m_LocalScale: {x: 22, y: 22, z: 22}
+=======
+  m_LocalScale: {x: 50, y: 50, z: 50}
+>>>>>>> EliZ
   m_Children:
   - {fileID: 3994513482638457773}
   - {fileID: 6933793226911073507}

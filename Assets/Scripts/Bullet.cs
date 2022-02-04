@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Black") && gameObject.CompareTag("Black"))
+        if (collision.gameObject.CompareTag("Blue") && gameObject.CompareTag("Blue"))
         {
             Debug.Log("Black Trigger");
             Destroy(gameObject);
