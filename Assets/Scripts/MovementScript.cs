@@ -13,12 +13,13 @@ public class MovementScript : MonoBehaviour
     public float gravity = 20.0f;
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
-    public float lookXLimit = 45.0f;
+    public float lookXLimit;
     public Slider glideSlider;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
-
+    [HideInInspector]
+    public float lookXLimitDefult;
 
     public AudioClip footStepSound;
     public float footStepDelay;
@@ -38,6 +39,8 @@ public class MovementScript : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        lookXLimitDefult = lookXLimit;
     }
 
     void Update()

@@ -4,9 +4,11 @@ using UnityEngine.UI;
 
 public class GunManager : MonoBehaviour
 {
-    public Transform gunHead;
+    public Transform ShotPoint;
     public GameObject player;
     [SerializeField] private CharacterController cc;
+
+    MovementScript playerMovment;
 
     public GameObject[] projectile;
     public float launchVelocity;
@@ -22,84 +24,147 @@ public class GunManager : MonoBehaviour
     public Image greenFIll;
     public Image blackFIll;
 
+    public Animation shootAnim;
+
+    LineRenderer lineRenderer;
     private void Awake()
     {
 
     }
     void Start()
     {
+        playerMovment = GetComponentInParent<MovementScript>();
         powerSlider.value = 1;
+        lineRenderer = GetComponent<LineRenderer>();
+
     }
 
+    
 
     public int i;
     void Update()
     {
         BulletTypeSelector();
-        cc = player.GetComponentInChildren<CharacterController>();
+
         if (currnetBall != null)
         {
             currnetBallPos = currnetBall.transform.position;
 
         }
-        launchVelocity = Mathf.Clamp(launchVelocity, 1, 100);
+        //launchVelocity = Mathf.Clamp(launchVelocity, 1, 100);
 
-        if (Input.GetButtonDown("Fire1"))
+
+        if (Input.GetMouseButtonDown(0))
         {
             if (currnetBall == null)
             {
-                currnetBall = Instantiate(projectile[i], gunHead.position, gunHead.rotation);
+                currnetBall = Instantiate(projectile[i], ShotPoint.position, ShotPoint.rotation);
                 currnetBall.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
-                                                     (0, 0, launchVelocity * 10));
-                Mathf.Clamp(0, 100, launchVelocity);
+                                                     (0, 0, powerSlider.value * launchVelocity));
+                //Mathf.Clamp(0, 100, launchVelocity);
+                shootAnim.Play("Shoot");
+            }
+
+            else
+            {
+                TP();
             }
             return;
         }
 
+        if (currnetBall)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Destroy(currnetBall);
+                shootAnim.Play("Reload");
+            }
+        }
+
+
         if (Input.GetKey(KeyCode.Q))
         {
+            lineRenderer.enabled = true;
             launchVelocity -= 0.08f;
             powerSlider.value -= 0.0008f;
         }
-        if (Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.E))
         {
+            lineRenderer.enabled = true;
             launchVelocity += 0.08f;
             powerSlider.value += 0.0008f;
         }
-        //powerSlider.value = launchVelocity;
+        else
+        {
+            lineRenderer.enabled = false;
+        }
 
 
-        //textMeshPro.text = launchVelocity.ToString("0");
-        TP(currnetBall);
+
+
+
+
+
+
+        if (!currnetBall)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                playerMovment.lookXLimit = 0;
+                Camera.main.fieldOfView = 50;
+                //GetComponentInChildren<GunMove>().lookXLimit = lookXLimitDefult;
+                GetComponentInChildren<LineRenderer>().enabled = true;
+                Debug.Log("Zooming");
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                playerMovment.lookXLimit = playerMovment.lookXLimitDefult;
+                Camera.main.fieldOfView = 105;
+                //GetComponentInChildren<GunMove>().lookXLimit = lookXLimitDefult;
+                GetComponentInChildren<LineRenderer>().enabled = false;
+                Debug.Log("Stopped Zooming");
+            }
+
+        }
+        else
+        {
+            playerMovment.lookXLimit = playerMovment.lookXLimitDefult;
+            Camera.main.fieldOfView = 105;
+            //GetComponentInChildren<GunMove>().lookXLimit = lookXLimitDefult;
+            GetComponentInChildren<LineRenderer>().enabled = false;
+            Debug.Log("Stopped Zooming");
+        }
+
+
+
+
+
+
 
     }
 
 
-    private void TP(GameObject inBullet)
+    private void TP()
     {
         if (!currnetBall)
         {
             return;
         }
-        if (Input.GetButtonDown("Fire2"))
-        {
 
-            cc.enabled = false;
-            player.transform.position = currnetBallPos;
-            cc.enabled = true;
+        cc.enabled = false;
+        player.transform.position = currnetBallPos;
+        cc.enabled = true;
 
-            //player.transform.position = currnetBall.transform.position;
-            Debug.Log(currnetBall.transform.position.ToString());
-            Debug.Log(player.transform.position.ToString());
-            Destroy(currnetBall);
+        //player.transform.position = currnetBall.transform.position;
+        Debug.Log(currnetBall.transform.position.ToString());
+        Debug.Log(player.transform.position.ToString());
+        Destroy(currnetBall);
 
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Destroy(currnetBall);
-        }
+
+
     }
 
+    
 
     private void BulletTypeSelector()
     {
@@ -132,6 +197,8 @@ public class GunManager : MonoBehaviour
             redBulletActive = true;
             greenBulletActive = false;
             blackBulletActive = false;
+            lineRenderer.startColor = Color.white;
+            lineRenderer.endColor = Color.red;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -139,6 +206,9 @@ public class GunManager : MonoBehaviour
             redBulletActive = false;
             greenBulletActive = true;
             blackBulletActive = false;
+            lineRenderer.startColor = Color.white;
+            lineRenderer.endColor = Color.green;
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -146,7 +216,12 @@ public class GunManager : MonoBehaviour
             redBulletActive = false;
             greenBulletActive = false;
             blackBulletActive = true;
+            lineRenderer.startColor = Color.white;
+            lineRenderer.endColor = Color.blue;
+
         }
+        
     }
 
+   
 }
