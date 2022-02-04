@@ -27,6 +27,11 @@ public class GunManager : MonoBehaviour
     public Animation shootAnim;
 
     LineRenderer lineRenderer;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
+    public AudioClip tpSound;
+    public AudioClip switchMode;
+
     private void Awake()
     {
 
@@ -62,12 +67,14 @@ public class GunManager : MonoBehaviour
                 currnetBall.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
                                                      (0, 0, powerSlider.value * launchVelocity));
                 //Mathf.Clamp(0, 100, launchVelocity);
+                AudioManager.Instance.Play(shootSound);
                 shootAnim.Play("Shoot");
             }
 
             else
             {
                 TP();
+                AudioManager.Instance.Play(tpSound);
             }
             return;
         }
@@ -77,6 +84,7 @@ public class GunManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Destroy(currnetBall);
+                AudioManager.Instance.Play(reloadSound);
                 shootAnim.Play("Reload");
             }
         }
@@ -194,6 +202,7 @@ public class GunManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            AudioManager.Instance.Play(switchMode);
             redBulletActive = true;
             greenBulletActive = false;
             blackBulletActive = false;
@@ -203,6 +212,7 @@ public class GunManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            AudioManager.Instance.Play(switchMode);
             redBulletActive = false;
             greenBulletActive = true;
             blackBulletActive = false;
@@ -213,6 +223,7 @@ public class GunManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            AudioManager.Instance.Play(switchMode);
             redBulletActive = false;
             greenBulletActive = false;
             blackBulletActive = true;
